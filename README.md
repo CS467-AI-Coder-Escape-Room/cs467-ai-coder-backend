@@ -1,97 +1,76 @@
-Welcome to the AWS CodeStar sample web application
-==================================================
+# CS467-AI-Coder-Escape-Room
+This is the Oregon State University capstone project repo for Ryan Johns, Heather Fillerup-Miller, and Steven Ruzicka
 
-This sample code helps get you started with a simple Node.js web application
-deployed by AWS Elastic Beanstalk and AWS CloudFormation.
+# React Escape Room AI Explorer
 
-What's Here
------------
+React Escape Room AI Explorer is a web application built using React, Three.js, Express.js, and MongoDB, designed to create a unique escape room experience that was built by comparing and utilizing different generative AI tools such as ChatGPT-3.5 and 4, Bard, GitHub CoPilot, AWS CodeWhisperer, and DALL-E based image based generators to name a few. The primary goal of this project is to demonstrate how AI technologies can help developers, junior and senior, be more productive. The secondary goal is to create a fun and engaging experience for everyone.
 
-This sample includes:
+## Features
 
-* README.md - this file
-* .ebextensions/ - this directory contains the configuration files that
-  AWS Elastic Beanstalk will deploy your Express application
-* package.json - this file contains various metadata relevant to your Node.js
-  application such as dependencies
-* server.js - this file contains the code for your application
-* public/ - this directory contains static web assets used by your application
-* tests/ - this directory contains unit tests for your application
-* template.yml - this file contains the description of AWS resources used by AWS
-  CloudFormation to deploy your infrastructure
-* template-configuration.json - this file contains the project ARN with placeholders used for tagging resources with the project ID  
+- Interactive 3D escape room environment built using React and Three.js.
+- Leaderboard to showcase top players and encourage friendly competition.
+
+## Installation and Setup
+1. Clone the repository
+    ## For the client (React app)
+    ```bash
+    git clone https://github.com/yourusername/CS467-AI-Coder-Escape-Room.git
+    ```
+
+2. Change into the project directory:
+    ## For the client (React app)
+    ```bash
+    cd CS467-AI-Coder-Escape-Room
+    ```
+
+3. Install dependencies:
+    ## For the client (React app)
+    ```bash
+    cd client
+    npm install
+    ```
+
+    ## For the server (Express app)
+    ```bash
+    cd ../server
+    npm install
+    ```
+
+4. Set up your MongoDB database:
+
+* For a local MongoDB database, follow the instructions [here](https://docs.mongodb.com/manual/installation/) and update the connectionString in the server's .env file to match your local database.
+* For a MongoDB Atlas database, follow the instructions [here](https://docs.atlas.mongodb.com/getting-started/) and update the connectionString in the server's .env file to match your Atlas database.
+
+Store your MongoDB connection string in a environment variable called MONGODB_URI in a .env file in the server directory.
+
+5. Start the development servers:
+    ## For the client (React app)
+    ```bash
+    cd client
+    npm start
+    ```
+
+    ## For the server (Express app)
+    ```bash
+    cd ../server
+    npm start
+    ```
+
+The React app will be available at http://localhost:3000, and the Express.js backend will run in process.env.PORT or by default  http://localhost:8000.
+
+## How to Play
+To play the game, simply visit the website and click on the "Start Game" button to start the escape room experience. The room you have entered contains a puzzle that you must solve in order to win. The puzzles are designed to be challenging, but they are also fair. Complete the escape room by solving all the puzzles and challenges. After you've escaped, check the leaderboard to compare your performance with other players.
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
+We welcome contributions from the community! If you would like to contribute to the project, please follow these steps:
+
+## Contributing
+Fork the repository.
+Create a new branch for your changes.
+Implement your changes and push them to your forked repository.
+Create a pull request with a clear description of your changes.
 
 
-Getting Started
----------------
 
-These directions assume you want to develop on your local computer, and not
-from the Amazon EC2 instance itself. If you're on the Amazon EC2 instance, the
-virtual environment is already set up for you, and you can start working on the
-code.
 
-To work on the sample code, you'll need to clone your project's repository to your
-local computer. If you haven't, do that first. You can find instructions in the AWS CodeStar user guide at https://docs.aws.amazon.com/codestar/latest/userguide/getting-started.html#clone-repo.
-
-1. Install Node.js on your computer. For details on available installers visit
-   https://nodejs.org/en/download/.
-
-2. Install NPM dependencies:
-
-        $ npm install
-
-3. Start the development server:
-
-        $ node app.js
-
-4. Open http://127.0.0.1:3000/ in a web browser to view your application.
-
-What Do I Do Next?
-------------------
-
-Once you have a virtual environment running, you can start making changes to
-the sample Node.js web application. We suggest making a small change to
-/public/index.html first, so you can see how changes pushed to
-your project's repository are automatically picked up and,deployed to the Amazon EC2
-instance by AWS Elastic Beanstalk. (You can watch the progress on your project dashboard.)
-Once you've seen how that works, start developing your own code, and have fun!
-
-To run your tests locally, go to the root directory of the
-sample code and run the `npm test` command, which
-AWS CodeBuild also runs through your `buildspec.yml` file.
-
-To test your new code during the release process, modify the existing tests or
-add tests to the tests directory. AWS CodeBuild will run the tests during the
-build stage of your project pipeline. You can find the test results
-in the AWS CodeBuild console.
-
-Learn more about AWS CodeBuild and how it builds and tests your application here:
-https://docs.aws.amazon.com/codebuild/latest/userguide/concepts.html
-
-Learn more about AWS CodeStar by reading the user guide.  Ask questions or make
-suggestions on our forum.
-
-User Guide: https://docs.aws.amazon.com/codestar/latest/userguide/welcome.html
-
-Forum: https://forums.aws.amazon.com/forum.jspa?forumID=248
-
-How Do I Add Template Resources to My Project?
-------------------
-
-To add AWS resources to your project, you'll need to edit the `template.yml`
-file in your project's repository. You may also need to modify permissions for
-your project's worker roles. After you push the template change, AWS CodeStar
-and AWS CloudFormation provision the resources for you.
-
-See the AWS CodeStar user guide for instructions to modify your template:
-https://docs.aws.amazon.com/codestar/latest/userguide/how-to-change-project.html#customize-project-template
-
-What Should I Do Before Running My Project in Production?
-------------------
-
-AWS recommends you review the security best practices recommended by the framework
-author of your selected sample application before running it in production. You
-should also regularly review and apply any available patches or associated security
-advisories for dependencies used within your application.
-
-Best Practices: https://docs.aws.amazon.com/codestar/latest/userguide/best-practices.html?icmpid=docs_acs_rm_sec

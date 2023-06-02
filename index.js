@@ -1,60 +1,29 @@
-var port = process.env.PORT || 3000,
-    http = require('http'),
-    fs = require('fs');
+require("dotenv").config();
 
-var app = http.createServer(function (req, res) {
-  if (req.url.indexOf('/img') != -1) {
-    var filePath = req.url.split('/img')[1];
-    fs.readFile(__dirname + '/public/img' + filePath, function (err, data) {
-      if (err) {
-        res.writeHead(404, {'Content-Type': 'text/plain'});
-        res.write('Error 404: Resource not found.');
-        console.log(err);
-      } else {
-        res.writeHead(200, {'Content-Type': 'image/svg+xml'});
-        res.write(data);
-      }
-      res.end();
-    });
-  } else if (req.url.indexOf('/js') != -1) {
-    var filePath = req.url.split('/js')[1];
-    fs.readFile(__dirname + '/public/js' + filePath, function (err, data) {
-      if (err) {
-        res.writeHead(404, {'Content-Type': 'text/plain'});
-        res.write('Error 404: Resource not found.');
-        console.log(err);
-      } else {
-        res.writeHead(200, {'Content-Type': 'text/javascript'});
-        res.write(data);
-      }
-      res.end();
-    });
-  } else if(req.url.indexOf('/css') != -1) {
-    var filePath = req.url.split('/css')[1];
-    fs.readFile(__dirname + '/public/css' + filePath, function (err, data) {
-      if (err) {
-        res.writeHead(404, {'Content-Type': 'text/plain'});
-        res.write('Error 404: Resource not found.');
-        console.log(err);
-      } else {
-        res.writeHead(200, {'Content-Type': 'text/css'});
-        res.write(data);
-      }
-      res.end();
-    });
-  } else {
-    fs.readFile(__dirname + '/public/index.html', function (err, data) {
-      if (err) {
-        res.writeHead(404, {'Content-Type': 'text/plain'});
-        res.write('Error 404: Resource not found.');
-        console.log(err);
-      } else {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-      }
-      res.end();
-    });
-  }
-}).listen(port, '0.0.0.0');
+const express = require("express");
+const cors = require("cors");
 
-module.exports = app;
+const databaseRouter = require('./routes/database');
+const app = express();
+const PORT = process.env.PORT || 8000;
+
+// Middleware
+app.use(express.json());
+app.use(cors());
+app.use('/database', databaseRouter);
+
+// Routes
+app.get("/", (req, res) => {
+  res.send("The server is running!");
+});
+
+// Health check AWS Elastic Beanstalk
+app.get('/health', (req, res) => {
+  res.sendStatus(200);
+});
+
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
